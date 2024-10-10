@@ -163,7 +163,7 @@ const mapSpecialFeatures = function(array){
 // PROBLEM #7 //
 
 const createNonsenseString = function(array, index){
-    //use reduce and create nonsese str based on spec index
+    //use reduce to create nonsese str based on spec index
     return array.reduce((acc, movie) => {
         //if title has spec index
         if (movie.title.length > index){
