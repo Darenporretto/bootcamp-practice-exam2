@@ -93,54 +93,92 @@ const collection = [
 
 // PROBLEM #1 //
 
-const setDigitalCode = function(){
-   
+const setDigitalCode = function(array, value){
+    for (let i = array.length - 1; i >= 0; i -= 2) {
+        //set digitalCode property to the given value
+        array[i].digitalCode = value;
+    }
+    //return modified array
+    return array;
 };
 
 // PROBLEM #2 //
 
-const filterByGenreTag = function(){
-    
+const filterByGenreTag = function(array, tag){
+    //filter to return movies specific genre
+    return array.filter(movie => movie.genreTags.includes(tag));
 };
-
-
 
 // PROBLEM #3 //
 
-const filterBySpecialFeatureType = function(){
+const filterBySpecialFeatureType = function(array, type){
+    //filter to return movies with certain spec effects
+    return array.filter(movie =>
+        movie.specialFeatures.some(feature => feature.type === type)
+        );
     
 };
-
 
 // PROBLEM #4 //
 
 const getTopSpecialFeature = function(array, title){
-    
-};
+   //base case
+   if (array.length === 0) {
+    return "no matching title found";
+}
 
+//get the first movie in the array
+const currentMovie = array[0];
+
+//check if titles match
+if (currentMovie.title === title) {
+    //if it has special features return desired string
+    if (currentMovie.specialFeatures.length > 0) {
+        return `${currentMovie.title} Special Feature: ${currentMovie.specialFeatures[0].title}`;
+    } else {
+        return `${currentMovie.title} Special Feature: No special features available`;
+    }
+}
+
+//recursive case 
+return getTopSpecialFeature(array.slice(1), title);
+};
 
 // PROBLEM #5 //
 
-const mapTitles = function(){
-    
+const mapTitles = function(array){
+    return array.map(movie => `${movie.title} (${movie.year}) - dir. ${movie.director}`);
+    //map to movies titles with year and director
 };
-
-
 
 // PROBLEM #6 //
 
-const mapSpecialFeatures = function(){
-    
+const mapSpecialFeatures = function(array){
+    //use map to special features for each movie
+    return array.map(movie =>
+        movie.specialFeatures.map(feature => feature.title)
+        );
 };
 
 // PROBLEM #7 //
 
-const createNonsenseString = function(){
+const createNonsenseString = function(array, index){
+    //use reduce and create nonsese str based on spec index
+    return array.reduce((acc, movie) => {
+        //if title has spec index
+        if (movie.title.length > index){
+            //add cahracter at the spc indexx of acc
+            return acc + movie.title[index];
+        }
+        //return acc unchanged if index is out
+        return acc;
+    }, '');
     
 };
 
 // PROBLEM #8 //
 
-const getValues = function(){
-    
+const getValues = function(object, props){
+    //map to get values from objest based on keys
+    return props.map(prop => object[prop]);
 };
